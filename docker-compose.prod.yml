@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: libbook-db-prod
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-libuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-libpass}
+      POSTGRES_DB: ${POSTGRES_DB:-libdb}
+    volumes:
+      - pgdata-prod:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-libuser} -d $${POSTGRES_DB:-libdb}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: maringgo/libbook-backend:latest
+    container_name: libbook-backend-prod
+    ports:
+      - "3001:3001"
+    environment:
+      DB_HOST: db
+      DB_USER: ${POSTGRES_USER:-libuser}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-libpass}
+      DB_NAME: ${POSTGRES_DB:-libdb}
+      DB_PORT: 5432
+      PORT: ${PORT:-3001}
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    image: maringgo/libbook-frontend:latest
+    container_name: libbook-frontend-prod
+    ports:
+      - "80:80"
+    restart: always
+    depends_on:
+      - backend
+
+volumes:
+  pgdata-prod:
