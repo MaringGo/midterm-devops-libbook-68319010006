@@ -2,7 +2,7 @@
 
 ### รายชื่อผู้จัดทำ: นายชลิต กำแก้ว รหัสนักศึกษา: 68319010006
 
-![CI Status](https://github.com/MaringGo/midterm-devops-libbook-68319010006/actions/workflows/ci.yml/badge.svg)
+[![CI Pipeline](https://github.com/MaringGo/midterm-devops-libbook-68319010006/actions/workflows/ci.yml/badge.svg)](https://github.com/MaringGo/midterm-devops-libbook-68319010006/actions)
 
 ระบบ CRUD สำหรับบันทึกและจัดการข้อมูลทะเบียนหนังสือของห้องสมุดวิทยาลัย สร้างด้วย Express.js + PostgreSQL + HTML/CSS/JS (Vanilla)
 
