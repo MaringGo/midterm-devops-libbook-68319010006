@@ -41,3 +41,4 @@ docker-compose -f docker-compose.prod.yml up -d
 | POST | /api/books | บันทึกข้อมูลหนังสือใหม่ (ตรวจสอบ ISBN ซ้ำและปีที่พิมพ์) |
 | PUT | /api/books/:isbn | แก้ไขข้อมูลหนังสือและสถานะการยืมคืน |
 | DELETE | /api/books/:isbn | ลบข้อมูลหนังสือออกจากคลัง |
+
